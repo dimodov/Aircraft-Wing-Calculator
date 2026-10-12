@@ -37,16 +37,11 @@ public class GUI {
         System.out.println();
         if (String.valueOf(profile).length() == 4) {
 
-            // -- Gets values from NACA code
-            camMax = (profile / 1000) / 100.0 * rootChord;
-            camPosition = ((profile / 100) % 10) / 10.0 * rootChord;
-            maxThickness = (profile % 100) / 100.0;
-            
             // -- Displays NACA parameters
             System.out.println("Wing profile: NACA-" + profile);
-            System.out.println("Maximum camber: " + (float) camMax);
-            System.out.println("Camber position: " + (float)camPosition);
-            System.out.println("Maximum thickness: " + (float) maxThickness * rootChord);
+            System.out.println("Maximum camber: " + (float) ACalculator.getMaxCamber(profile, rootChord));
+            System.out.println("Camber position: " + (float) ACalculator.getCamberPosition(profile, rootChord));
+            System.out.println("Maximum thickness: " + (float) ACalculator.getMaximumThickness(profile, rootChord) * rootChord);
         } 
         else {
             System.out.println("Invalid NACA code. Please enter a 4-digit code.");
@@ -55,7 +50,7 @@ public class GUI {
         // -- Gives a wing area
         System.out.println();
         System.out.println("Wing area (one/ both wings): " +  (float) ACalculator.getArea(rootChord, tipChord, wingspan) + " / " +  (float) ACalculator.getArea(rootChord, tipChord, wingspan) * 2);
-        System.out.println("Wing volume (one/ both wings): " +  (float) ACalculator.getVolume(maxThickness, rootChord, tipChord, wingspan) + " / " +  (float) ACalculator.getVolume(maxThickness, rootChord, tipChord, wingspan) * 2);
+        System.out.println("Wing volume (one/ both wings): " +  (float) ACalculator.getVolume(ACalculator.getMaximumThickness(profile, rootChord), rootChord, tipChord, wingspan) + " / " +  (float) ACalculator.getVolume(ACalculator.getMaximumThickness(profile, rootChord), rootChord, tipChord, wingspan) * 2);
 
         System.out.println();
         System.out.println("Do you want to calculate lift force? (Yes / No): ");

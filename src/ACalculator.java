@@ -1,5 +1,20 @@
 public class ACalculator {
 
+    // Gives the maximum camber
+    public static double getMaxCamber(int profile, double rootChord) {
+        return (profile / 1000) / 100.0 * rootChord;
+    }
+
+    // Gives the camber position
+    public static double getCamberPosition(int profile, double rootChord) {
+        return ((profile / 100) % 10) / 10.0 * rootChord;
+    }
+
+    // Gives the maximum thickness in percentage of the chord length
+    public static double getMaximumThickness(int profile, double rootChord) {
+        return (profile % 100) / 100.0;
+    }
+
     // Calculates the wing area using integration
     public static double getArea(double rootChord, double tipChord, double wingSpan) {
         int step = 10000;
