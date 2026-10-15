@@ -1,3 +1,4 @@
+package com.project;
 public class ACalculator {
 
     // Gives the maximum camber
@@ -79,4 +80,5 @@ public class ACalculator {
         
         return 0.0;
     }
+    
 }

@@ -1,18 +1,23 @@
-## Getting Started
+# Aircraft Wing Calculator
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Requirements
 
-## Folder Structure
+- Java 17 or newer
+- Apache Maven 3.6.3 or newer
 
-The workspace contains two folders by default, where:
+## Build
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+From the project directory, run:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+```sh
+mvn package
+```
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Maven compiles the application and creates an executable JAR at
+`target/aerocraft-design-project-1.0-SNAPSHOT.jar`.
 
-## Dependency Management
+## Run
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+```sh
+java -jar target/aerocraft-design-project-1.0-SNAPSHOT.jar
+```

@@ -1,3 +1,4 @@
+package com.project;
 import java.util.Scanner;
 
 public class GUI {
@@ -73,11 +74,6 @@ public class GUI {
 
             double isStall = Math.sqrt((mass * 9.81) / (airDensity * ACalculator.getArea(rootChord, tipChord, wingspan)) * liftCoefficient); // Minimum velocity before stall
 
-            //System.out.println(airDensity);
-            //System.out.println(velocity);
-            //System.out.println(liftCoefficient);
-            //System.out.println(isStall);
-
             if (isStall >= velocity) {
                 System.out.println("Warning: The aircraft is at risk of stalling.");
                 System.out.println("Minimum appropriate aircraft velocity: " + (float) isStall + " m/s");
@@ -87,6 +83,7 @@ public class GUI {
                 double liftForce = 0.5 * airDensity * Math.pow(velocity, 2) * ACalculator.getArea(rootChord, tipChord, wingspan) * liftCoefficient;
                 System.out.println("Lift force: " + (float) (liftForce / 1000) + " kN");
             }
+            
         }
         scanner.close();
     }
