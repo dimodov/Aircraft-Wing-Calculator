@@ -11,31 +11,36 @@ import javafx.stage.Stage;
 public class Tets extends Application {
         public void start(Stage stage) {
 
-        Label title = new Label("My First JavaFX App");
+        Label title = new Label("Get NACA parameters");
 
-        TextField nameInput = new TextField();
-        nameInput.setPromptText("Enter your name");
+        TextField nacaInput = new TextField();
+        nacaInput.setPromptText("Enter your NACA code here...");
 
-        Button button = new Button("Say Hello");
+        TextField rootChord = new TextField();
+        rootChord.setPromptText("Enter root chord...");
+
+        Button button = new Button("Calculate");
 
         Label result = new Label();
 
         button.setOnAction(event -> {
-            String name = nameInput.getText();
-            result.setText("Hello, " + name + "!");
+            result.setText("Maximum camber: " + ACalculator.getMaxCamber(Integer.parseInt(nacaInput.getText()), Double.parseDouble(rootChord.getText())) + "m" + "\n" +
+                           "Camber position at: " + ACalculator.getCamberPosition(Integer.parseInt(nacaInput.getText()), Double.parseDouble(rootChord.getText())) + "m" + "\n" +
+                           "Maximum thickness: " + ACalculator.getMaximumThickness(Integer.parseInt(nacaInput.getText()), Double.parseDouble(rootChord.getText())));
         });
 
         VBox layout = new VBox(10);
         layout.getChildren().addAll(
             title,
-            nameInput,
+            nacaInput,
+            rootChord,
             button,
             result
         );
 
         Scene scene = new Scene(layout, 400, 250);
 
-        stage.setTitle("My First Application");
+        stage.setTitle("Wing Calculator App");
         stage.setScene(scene);
         stage.show();
     }
