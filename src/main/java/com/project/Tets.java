@@ -29,6 +29,8 @@ public class Tets extends Application {
 
         Button calculateNaca = new Button("Calculate");
 
+        Button backToMain = new Button("Back to main menu");
+
         // Sets the action for the calculate button
         calculateNaca.setOnAction(event -> {
             String nacaCode = nacaInput.getText();
@@ -64,19 +66,25 @@ public class Tets extends Application {
         });
 
         // Creates a VBox layout to hold the GUI elements
-        VBox whatever = new VBox(10);
-        whatever.getChildren().addAll(title, calculateNacaParameters);
+        VBox showedBox = new VBox(10);
+        showedBox.getChildren().addAll(title, calculateNacaParameters);
 
         // Sets the action for the calculate NACA parameters button
         calculateNacaParameters.setOnAction(event -> {
 
             // Clears the VBox and adds the input fields and calculate button
-            whatever.getChildren().clear();
-            whatever.getChildren().addAll(nacaInput, rootChord, result, calculateNaca);
+            showedBox.getChildren().clear();
+            showedBox.getChildren().addAll(nacaInput, rootChord, result, calculateNaca, backToMain);
+        });
+
+        backToMain.setOnAction(event -> {
+            // Clears the VBox and adds the main menu elements
+            showedBox.getChildren().clear();
+            showedBox.getChildren().addAll(title, calculateNacaParameters);
         });
 
         // Creates a scene with the VBox layout and sets the stage
-        Scene scene = new Scene(whatever, 400, 250);
+        Scene scene = new Scene(showedBox, 400, 250);
 
         stage.setTitle("Wing Calculator App");
         stage.setScene(scene);
