@@ -9,27 +9,79 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Tets extends Application {
-    public void start(Stage stage) {
 
-        // GUI Elements
-        Label title = new Label("Wing Calculator App");
+    // Declares a Stage variable to hold the main application window
+    private Stage stage;
 
-        // Creates a label to display the results
-        Label result = new Label();
+    // Created title label for the application
+    private Label title = new Label("Wing Calculator App");
 
-        // Creates text fields for user input
-        TextField nacaInput = new TextField();
-        nacaInput.setPromptText("Enter your NACA code here...");
+    // Creates a label to display the results
+    private Label result = new Label();
 
-        TextField rootChord = new TextField();
-        rootChord.setPromptText("Enter root chord...");
+    // Creates text fields for user input
+    private TextField nacaInput = new TextField();
+
+    private TextField rootChord = new TextField();
         
-        // Creates a button to calculate NACA parameters
-        Button calculateNacaParameters = new Button("Calculate NACA parameters");
+    // Creates a button to calculate NACA parameters
+    private Button calculateNacaParameters = new Button("Calculate NACA parameters");
 
-        Button calculateNaca = new Button("Calculate");
+    private Button calculateNaca = new Button("Calculate");
 
-        Button backToMain = new Button("Back to main menu");
+    private Button backToMain = new Button("Back to the main menu");
+
+    // Creates a VBox layout to hold the GUI elements
+    private VBox showedBox = new VBox(10);
+
+    //@Override 
+    public void start(Stage stage) {
+        this.stage = stage;
+
+        setupInputs();
+        setAnActionNaca();
+        setupLayout();
+        setupUI();
+    }
+
+    private void setupLayout() {
+        // Adds the title and calculate button to the VBox
+        showedBox.getChildren().clear();
+        showedBox.getChildren().addAll(title, calculateNacaParameters);
+    }
+
+    private void setupInputs() {
+        // Sets prompt text for the input fields
+        nacaInput.setPromptText("Enter NACA code (e.g., 2412)");
+        rootChord.setPromptText("Enter root chord length (e.g., 1.5)");
+
+        //nacaInput.setVisible(false);
+        //nacaInput.setManaged(false);
+
+        //rootChord.setVisible(false);
+        //rootChord.setManaged(false);
+
+        //calculateNaca.setVisible(false);
+        //calculateNaca.setManaged(false);
+
+        //backToMain.setVisible(false);
+        //backToMain.setManaged(false);
+    }
+
+    private void setAnActionNaca() {
+        // Sets the action for the calculate NACA parameters button
+        calculateNacaParameters.setOnAction(event -> {
+
+            // Clears the VBox and adds the input fields and calculate button
+            showedBox.getChildren().clear();
+            showedBox.getChildren().addAll(nacaInput, rootChord, calculateNaca, backToMain, result);
+        });
+
+        backToMain.setOnAction(event -> {
+            // Clears the VBox and adds the main menu elements
+            showedBox.getChildren().clear();
+            setupLayout();
+        });
 
         // Sets the action for the calculate button
         calculateNaca.setOnAction(event -> {
@@ -64,28 +116,10 @@ public class Tets extends Application {
                 result.setText("Please fill in both fields.");
             }
         });
+    }
 
-        // Creates a VBox layout to hold the GUI elements
-        VBox showedBox = new VBox(10);
-        showedBox.getChildren().addAll(title, calculateNacaParameters);
-
-        // Sets the action for the calculate NACA parameters button
-        calculateNacaParameters.setOnAction(event -> {
-
-            // Clears the VBox and adds the input fields and calculate button
-            showedBox.getChildren().clear();
-            showedBox.getChildren().addAll(nacaInput, rootChord, result, calculateNaca, backToMain);
-        });
-
-        backToMain.setOnAction(event -> {
-            // Clears the VBox and adds the main menu elements
-            showedBox.getChildren().clear();
-            showedBox.getChildren().addAll(title, calculateNacaParameters);
-        });
-
-        // Creates a scene with the VBox layout and sets the stage
+    private void setupUI() {
         Scene scene = new Scene(showedBox, 400, 250);
-
         stage.setTitle("Wing Calculator App");
         stage.setScene(scene);
         stage.show();
