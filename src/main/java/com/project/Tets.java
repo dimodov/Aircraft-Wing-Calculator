@@ -13,28 +13,25 @@ public class Tets extends Application {
     // Declares a Stage variable to hold the main application window
     private Stage stage;
 
-    // Created title label for the application
-    private Label title = new Label("Wing Calculator App");
-
-    // Creates a label to display the results
+    // Created label for the application
+    public Label title = new Label("Wing Calculator App");
     private Label result = new Label();
 
     // Creates text fields for user input
-    private TextField nacaInput = new TextField();
-
-    private TextField rootChord = new TextField();
+    public TextField nacaInput = new TextField();
+    public TextField rootChord = new TextField();
         
     // Creates a button to calculate NACA parameters
-    private Button calculateNacaParameters = new Button("Calculate NACA parameters");
-
+    public Button calculateNacaParameters = new Button("Calculate NACA parameters");
     private Button calculateNaca = new Button("Calculate");
-
     private Button backToMain = new Button("Back to the main menu");
+    private Button calculateAreaAndVolume = new Button("Calculate Area and Volume");
+
+    private AreaAndVolume areaAndVolume = new AreaAndVolume();
 
     // Creates a VBox layout to hold the GUI elements
     private VBox showedBox = new VBox(10);
 
-    //@Override 
     public void start(Stage stage) {
         this.stage = stage;
 
@@ -47,25 +44,13 @@ public class Tets extends Application {
     private void setupLayout() {
         // Adds the title and calculate button to the VBox
         showedBox.getChildren().clear();
-        showedBox.getChildren().addAll(title, calculateNacaParameters);
+        showedBox.getChildren().addAll(title, calculateNacaParameters, calculateAreaAndVolume);
     }
 
     private void setupInputs() {
         // Sets prompt text for the input fields
         nacaInput.setPromptText("Enter NACA code (e.g., 2412)");
         rootChord.setPromptText("Enter root chord length (e.g., 1.5)");
-
-        //nacaInput.setVisible(false);
-        //nacaInput.setManaged(false);
-
-        //rootChord.setVisible(false);
-        //rootChord.setManaged(false);
-
-        //calculateNaca.setVisible(false);
-        //calculateNaca.setManaged(false);
-
-        //backToMain.setVisible(false);
-        //backToMain.setManaged(false);
     }
 
     private void setAnActionNaca() {
@@ -85,6 +70,7 @@ public class Tets extends Application {
 
         // Sets the action for the calculate button
         calculateNaca.setOnAction(event -> {
+
             String nacaCode = nacaInput.getText();
             String rootChordValue = rootChord.getText();
 
@@ -115,6 +101,10 @@ public class Tets extends Application {
             else {
                 result.setText("Please fill in both fields.");
             }
+        });
+        calculateAreaAndVolume.setOnAction(event -> {
+            // Clears the VBox and adds the input fields and calculate button
+            showedBox.getChildren().setAll(areaAndVolume.getView(), backToMain);
         });
     }
 
